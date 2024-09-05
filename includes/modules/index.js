@@ -1,3 +1,4 @@
-import HelloWorld from './HelloWorld/HelloWorld';
+import PepiteSlider from './PepiteSlider/PepiteSlider';
+import PepiteSliderItem from './PepiteSlider/PepiteSliderItem';
 
-export default [HelloWorld];
+export default [PepiteSlider, PepiteSliderItem]; 
