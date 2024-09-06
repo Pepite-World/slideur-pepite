@@ -267,7 +267,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 					'off' => et_builder_i18n('No'),
 				),
 				'default_on_front' => 'on',
-				'toggle_slug'      => 'elements',
+				// 'toggle_slug'      => 'elements',
 				'description'      => esc_html__('This setting will turn on and off the navigation arrows. No arrows activates invisible click zones on left & right', 'pesl-pepite-slider'),
 				'mobile_options'   => true,
 				'hover'            => 'tabs',
@@ -280,7 +280,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 				'choose_text'        => esc_attr__('Choose a Cursor Image', 'et_builder'),
 				'update_text'        => esc_attr__('Set As Cursor', 'et_builder'),
 				'description'        => esc_html__('If defined, this image will be used as previous cursor. Upload an image, or leave blank for default cursor.', 'et_builder'),
-				'toggle_slug'        => 'elements',
+				// 'toggle_slug'        => 'elements',
 				'dynamic_content'    => 'image',
 				'mobile_options'     => false,
 				'hover'              => false,
@@ -296,7 +296,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 				'choose_text'        => esc_attr__('Choose a Cursor Image', 'et_builder'),
 				'update_text'        => esc_attr__('Set As Cursor', 'et_builder'),
 				'description'        => esc_html__('If defined, this image will be used as next cursor. Upload an image, or leave blank for default cursor.', 'et_builder'),
-				'toggle_slug'        => 'elements',
+				// 'toggle_slug'        => 'elements',
 				'dynamic_content'    => 'image',
 				'mobile_options'     => false,
 				'hover'              => false,
@@ -312,7 +312,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 				'choose_text'        => esc_attr__('Choose a Cursor Image', 'et_builder'),
 				'update_text'        => esc_attr__('Set As Cursor', 'et_builder'),
 				'description'        => esc_html__('If defined, this image will be used as cursor on disabled click zone. Upload an image, or leave blank for default cursor.', 'et_builder'),
-				'toggle_slug'        => 'elements',
+				// 'toggle_slug'        => 'elements',
 				'dynamic_content'    => 'image',
 				'mobile_options'     => false,
 				'hover'              => false,
@@ -329,7 +329,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 					'off' => et_builder_i18n('No'),
 				),
 				'default_on_front' => 'on',
-				'toggle_slug'      => 'elements',
+				// 'toggle_slug'      => 'elements',
 				'description'      => esc_html__('This setting will turn on and off the circle buttons at the bottom of the slider.', 'pesl-pepite-slider'),
 				'mobile_options'   => true,
 				'hover'            => 'tabs',
@@ -343,7 +343,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 					'off' => et_builder_i18n('No'),
 				),
 				'default_on_front' => 'on',
-				'toggle_slug'      => 'elements',
+				// 'toggle_slug'      => 'elements',
 				'description'      => esc_html__('This setting will turn on and off current and total number of slides.', 'pesl-pepite-slider'),
 				'mobile_options'   => true,
 				'hover'            => 'tabs',
@@ -357,7 +357,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 					'off' => et_builder_i18n('No'),
 				),
 				'default_on_front' => 'on',
-				'toggle_slug'      => 'elements',
+				// 'toggle_slug'      => 'elements',
 				'description'      => esc_html__('This setting will turn on and off loop on slides.', 'pesl-pepite-slider'),
 				'mobile_options'   => true,
 				'hover'            => 'tabs',
@@ -371,18 +371,34 @@ class PESL_PepiteSlider extends ET_Builder_Module
 					'off' => et_builder_i18n('No'),
 				),
 				'default_on_front' => 'on',
-				'toggle_slug'      => 'elements',
+				// 'toggle_slug'      => 'elements',
 				'description'      => esc_html__('This setting will turn on scrollbar for slides.', 'pesl-pepite-slider'),
 				'mobile_options'   => true,
 				'hover'            => 'tabs',
+			),
+			'swiper_transition'	=> array(
+				'label'           => esc_html__('SwiperJS transitions', 'pesl-pepite-slider'),
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'default_on_front' => 'slide',
+				'options'         => array(
+					'slide' => esc_html__('slide', 'pesl-pepite-slider'),
+					'fade' => esc_html__('fade', 'pesl-pepite-slider'),
+					'cube' => esc_html__('cube', 'pesl-pepite-slider'),
+					'coverflow' => esc_html__('coverflow', 'pesl-pepite-slider'),
+					'flip' => esc_html__('flip', 'pesl-pepite-slider'),
+					'creative' => esc_html__('creative', 'pesl-pepite-slider'),
+					'cards' => esc_html__('cards', 'pesl-pepite-slider'),
+				),
+				'description'	=> esc_html__('Showing the full content will not truncate your posts on the index page. Showing the excerpt will only display your excerpt text.', 'et_builder'),
 			),
 			'arrows_custom_color'     => array(
 				'label'          => esc_html__('Arrow Color', 'pesl-pepite-slider'),
 				'description'    => esc_html__('Pick a color to use for the slider arrows that are used to navigate through each slide.', 'pesl-pepite-slider'),
 				'type'           => 'color-alpha',
 				'custom_color'   => true,
-				'tab_slug'       => 'advanced',
-				'toggle_slug'    => 'navigation',
+				// 'tab_slug'       => 'advanced',
+				// 'toggle_slug'    => 'navigation',
 				'mobile_options' => true,
 				'sticky'         => true,
 				'hover'          => 'tabs',
@@ -392,18 +408,19 @@ class PESL_PepiteSlider extends ET_Builder_Module
 				'description'    => esc_html__('Pick a color to use for the dot navigation that appears at the bottom of the slider to designate which slide is active.', 'pesl-pepite-slider'),
 				'type'           => 'color-alpha',
 				'custom_color'   => true,
-				'tab_slug'       => 'advanced',
-				'toggle_slug'    => 'navigation',
+				// 'tab_slug'       => 'advanced',
+				// 'toggle_slug'    => 'navigation',
 				'mobile_options' => true,
 				'sticky'         => true,
 				'hover'          => 'tabs',
 			),
+			
 		);
 
 		return $fields;
 	}
 
-	public function get_transition_fields_css_props()
+	public function ZZ_old_get_transition_fields_css_props()
 	{
 		$fields = parent::get_transition_fields_css_props();
 
@@ -417,6 +434,14 @@ class PESL_PepiteSlider extends ET_Builder_Module
 	}
 
 	function before_render()
+	{
+		global $et_pb_slider_show_mobile;
+		$et_pb_slider_show_mobile = array(
+			'show_content_on_mobile' => $this->props['show_content_on_mobile'] ?? false,
+		);
+	}
+
+	function ZZ_old_before_render()
 	{
 		global $et_pb_slider_has_video, $et_pb_slider_parallax, $et_pb_slider_parallax_method, $et_pb_slider_show_mobile, $et_pb_slider_custom_icon, $et_pb_slider_custom_icon_tablet, $et_pb_slider_custom_icon_phone, $et_pb_slider_item_num, $et_pb_slider_button_rel;
 		global $et_pb_slider_parent_type;
@@ -938,7 +963,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 
 		$scrollbar  = $show_scrollbar === 'on' ? '<div class="swiper-scrollbar"></div>' : '';
 		$output = sprintf(
-			'<div%3$s class="%1$s swiper"%5$s>
+			'<div%3$s class="%1$s swiper"%5$s >
 				<div class="swiper-wrapper et_pb_slides">
 					%2$s
 				</div>
@@ -1064,6 +1089,9 @@ class PESL_PepiteSlider extends ET_Builder_Module
 		}
 		if (@$this->props['loop_slides'] === 'on') {
 			$swiper_props['loop'] = true;
+		}
+		if (@$this->props['swiper_transition']) {
+			$swiper_props['effect'] = $this->props['swiper_transition'];
 		}
 
 		// lazy loading

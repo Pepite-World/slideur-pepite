@@ -582,9 +582,9 @@ class Pepite_Slider_Item extends ET_Builder_Module
 		// render button
 		$button_classname = array( 'et_pb_more_button' );
 
-		if ( 'on' !== $et_pb_slider_show_mobile['show_cta_on_mobile'] ) {
-			$button_classname[] = $hide_on_mobile_class;
-		}
+		// if ( 'on' !== $et_pb_slider_show_mobile['show_cta_on_mobile'] ) {
+		// 	$button_classname[] = $hide_on_mobile_class;
+		// }
 
 		// $button = $this->render_button(
 		// 	array(
