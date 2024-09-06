@@ -213,34 +213,35 @@ class Pepite_Slider_Item extends ET_Builder_Module
                 'css' => array(
                         'main' => array(
                             '%%order_class%% .et_pb_slide_image',
+                            '%%order_class%% .et_pb_slide_video',
                             '%%order_class%% .et_pb_section_video_bg',
                         ),
                 ),
             ),
-            'max_width'       => array(
-                'use_module_alignment' => false,
-                'css'                  => array(
-                    // 'main' => '%%order_class%%.pesl_pepite_slider_item .pesl_slider_container_inner .et_pb_slide_video, %%order_class%%.pesl_pepite_slider_item .pesl_slider_container_inner .et_pb_slide_image',
-                    'main' => '.et_pb_module.pesl_pepite_slider %%order_class%% .pesl_slider_container_inner .slide_content_wrapper',
-                ),
-                'options'              => array(
-                    'width'     => array(
-                        'label' => esc_html__('Content Width', 'pesl-pepite-slider'),
-                    ),
-                    'max_width' => array(
-                        'label' => esc_html__('Content Max Width', 'pesl-pepite-slider'),
-                    ),
-                ),
-            ),
+            // 'max_width'       => array(
+            //     'use_module_alignment' => false,
+            //     'css'                  => array(
+            //         // 'main' => '%%order_class%%.pesl_pepite_slider_item .pesl_slider_container_inner .et_pb_slide_video, %%order_class%%.pesl_pepite_slider_item .pesl_slider_container_inner .et_pb_slide_image',
+            //         'main' => '.et_pb_module.pesl_pepite_slider %%order_class%% .pesl_slider_container_inner .slide_content_wrapper',
+            //     ),
+            //     'options'              => array(
+            //         'width'     => array(
+            //             'label' => esc_html__('Content Width', 'pesl-pepite-slider'),
+            //         ),
+            //         'max_width' => array(
+            //             'label' => esc_html__('Content Max Width', 'pesl-pepite-slider'),
+            //         ),
+            //     ),
+            // ),
             'height'          => array(
 				'css' => array(
 					// 'main' => '%%order_class%%.pesl_pepite_slider_item .pesl_slider_container_inner .et_pb_slide_video, %%order_class%%.pesl_pepite_slider_item .pesl_slider_container_inner .et_pb_slide_image',
 					'main' => '.et_pb_module.pesl_pepite_slider %%order_class%% .pesl_slider_container_inner .slide_content_wrapper',
 				),
 			),
-            'scroll_effects'  => false,
-            'position_fields' => false,
-            'sticky'          => false,
+            // 'scroll_effects'  => false,
+            // 'position_fields' => false,
+            // 'sticky'          => false,
         );
 
         $this->custom_css_fields = array(
@@ -294,16 +295,6 @@ class Pepite_Slider_Item extends ET_Builder_Module
                 'mobile_options'  => true,
                 'hover'           => 'tabs',
             ),
-            // 'button_text'          => array(
-            //     'label'           => et_builder_i18n('Button'),
-            //     'type'            => 'text',
-            //     'option_category' => 'basic_option',
-            //     'description'     => esc_html__('Define the text for the slide button', 'et_builder'),
-            //     'toggle_slug'     => 'main_content',
-            //     'dynamic_content' => 'text',
-            //     'mobile_options'  => true,
-            //     'hover'           => 'tabs',
-            // ),
             'button_link'          => array(
                 'label'            => esc_html__('Button Link URL', 'et_builder'),
                 'type'             => 'text',
@@ -313,18 +304,6 @@ class Pepite_Slider_Item extends ET_Builder_Module
                 'default_on_front' => '#',
                 'dynamic_content'  => 'url',
             ),
-            // 'url_new_window'       => array(
-            //     'label'            => esc_html__('Button Link Target', 'et_builder'),
-            //     'type'             => 'select',
-            //     'option_category'  => 'configuration',
-            //     'options'          => array(
-            //         'off' => esc_html__('In The Same Window', 'et_builder'),
-            //         'on'  => esc_html__('In The New Tab', 'et_builder'),
-            //     ),
-            //     'toggle_slug'      => 'link_options',
-            //     'description'      => esc_html__('Here you can choose whether or not your link opens in a new window', 'et_builder'),
-            //     'default_on_front' => 'off',
-            // ),
             'image'                => array(
                 'label'              => et_builder_i18n('Content'),
                 'type'               => 'upload',
@@ -341,63 +320,6 @@ class Pepite_Slider_Item extends ET_Builder_Module
                 'mobile_options'     => true,
                 'hover'              => 'tabs',
             ),
-            // 'use_bg_overlay'       => array(
-            //     'label'            => esc_html__('Use Background Overlay', 'et_builder'),
-            //     'type'             => 'yes_no_button',
-            //     'option_category'  => 'configuration',
-            //     'options'          => array(
-            //         'off' => et_builder_i18n('No'),
-            //         // Uses cached uppercase translation but keeps the lowercase not change definition content.
-            //         'on'  => strtolower(et_builder_i18n('Yes')),
-            //     ),
-            //     'affects'          => array(
-            //         'bg_overlay_color',
-            //     ),
-            //     'default_on_front' => '',
-            //     'tab_slug'         => 'advanced',
-            //     'toggle_slug'      => 'overlay',
-            //     'description'      => esc_html__('When enabled, a custom overlay color will be added above your background image and behind your slider content.', 'et_builder'),
-            // ),
-            // 'bg_overlay_color'     => array(
-            //     'label'           => esc_html__('Background Overlay Color', 'et_builder'),
-            //     'type'            => 'color-alpha',
-            //     'custom_color'    => true,
-            //     'depends_show_if' => 'on',
-            //     'description'     => esc_html__('Use the color picker to choose a color for the background overlay.', 'et_builder'),
-            //     'tab_slug'        => 'advanced',
-            //     'toggle_slug'     => 'overlay',
-            //     'mobile_options'  => true,
-            //     'sticky'          => true,
-            // ),
-            // 'use_text_overlay'     => array(
-            //     'label'            => esc_html__('Use Text Overlay', 'et_builder'),
-            //     'type'             => 'yes_no_button',
-            //     'option_category'  => 'configuration',
-            //     'options'          => array(
-            //         'off' => et_builder_i18n('No'),
-            //         // Uses cached uppercase translation but keeps the lowercase not change definition content.
-            //         'on'  => strtolower(et_builder_i18n('Yes')),
-            //     ),
-            //     'default_on_front' => '',
-            //     'affects'          => array(
-            //         'text_overlay_color',
-            //         'text_border_radius',
-            //     ),
-            //     'tab_slug'         => 'advanced',
-            //     'toggle_slug'      => 'overlay',
-            //     'description'      => esc_html__('When enabled, a background color is added behind the slider text to make it more readable atop background images.', 'et_builder'),
-            // ),
-            // 'text_overlay_color'   => array(
-            //     'label'           => esc_html__('Text Overlay Color', 'et_builder'),
-            //     'type'            => 'color-alpha',
-            //     'custom_color'    => true,
-            //     'depends_show_if' => 'on',
-            //     'tab_slug'        => 'advanced',
-            //     'toggle_slug'     => 'overlay',
-            //     'description'     => esc_html__('Use the color picker to choose a color for the text overlay.', 'et_builder'),
-            //     'mobile_options'  => true,
-            //     'sticky'          => true,
-            // ),
             'alignment'            => array(
                 'label'            => esc_html__('Content Alignment', 'et_builder'),
                 'type'             => 'select',
@@ -452,16 +374,6 @@ class Pepite_Slider_Item extends ET_Builder_Module
                 'toggle_slug'      => 'player_pause',
                 'description'      => esc_html__('Allow video to be paused by other players when they begin playing', 'et_builder'),
             ),
-            // 'content'              => array(
-            //     'label'           => et_builder_i18n('Body'),
-            //     'type'            => 'tiny_mce',
-            //     'option_category' => 'basic_option',
-            //     'description'     => esc_html__('Input your main slide text content here.', 'et_builder'),
-            //     'toggle_slug'     => 'main_content',
-            //     'dynamic_content' => 'text',
-            //     'mobile_options'  => true,
-            //     'hover'           => 'tabs',
-            // ),
             'arrows_custom_color'  => array(
                 'label'          => esc_html__('Arrow Color', 'et_builder'),
                 'description'    => esc_html__('Pick a color to use for the slider arrows that are used to navigate through each slide.', 'et_builder'),
@@ -490,26 +402,6 @@ class Pepite_Slider_Item extends ET_Builder_Module
                 'description' => esc_html__('This will change the label of the slide in the builder for easy identification.', 'et_builder'),
                 'toggle_slug' => 'admin_label',
             ),
-            // 'text_border_radius'   => array(
-            //     'label'            => esc_html__('Text Overlay Border Radius', 'et_builder'),
-            //     'description'      => esc_html__('Increasing the border radius will increase the roundness of the overlay corners. Setting this value to 0 will result in squared corners.', 'et_builder'),
-            //     'type'             => 'range',
-            //     'option_category'  => 'layout',
-            //     'allowed_units'    => array( '%', 'em', 'rem', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ex', 'vh', 'vw' ),
-            //     'default'          => '3',
-            //     'default_unit'     => 'px',
-            //     'default_on_front' => '',
-            //     'range_settings'   => array(
-            //         'min'  => '0',
-            //         'max'  => '100',
-            //         'step' => '1',
-            //     ),
-            //     'depends_show_if'  => 'on',
-            //     'tab_slug'         => 'advanced',
-            //     'toggle_slug'      => 'overlay',
-            //     'mobile_options'   => true,
-            //     'sticky'           => true,
-            // ),
             '__video_embed'        => array(
                 'type'                => 'computed',
                 'computed_callback'   => array( 'ET_Builder_Module_Slider_Item', 'get_video_embed' ),
