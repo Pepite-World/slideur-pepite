@@ -917,12 +917,12 @@ class Pepite_Slider_Item extends ET_Builder_Module
 				%9$s
 				<div class="pesl_container clearfix swiper-slide-container">
 					<div class="pesl_slider_container_inner">
+                        <div class="pesl_slide_description">
+                            %1$s
+                            %2$s
+                        </div>
                         <div class="slide_content_wrapper">
                             %3$s
-                            <div class="pesl_slide_description">
-                                %1$s
-                                %2$s
-                            </div>
                         </div>
 					</div>
 				</div>

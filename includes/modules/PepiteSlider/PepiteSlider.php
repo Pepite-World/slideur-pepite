@@ -382,6 +382,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 				'option_category' => 'configuration',
 				'default_on_front' => 'slide',
 				'options'         => array(
+					'none' => esc_html__('none', 'pesl-pepite-slider'),
 					'slide' => esc_html__('slide', 'pesl-pepite-slider'),
 					'fade' => esc_html__('fade', 'pesl-pepite-slider'),
 					'cube' => esc_html__('cube', 'pesl-pepite-slider'),
@@ -1091,7 +1092,13 @@ class PESL_PepiteSlider extends ET_Builder_Module
 			$swiper_props['loop'] = true;
 		}
 		if (@$this->props['swiper_transition']) {
-			$swiper_props['effect'] = $this->props['swiper_transition'];
+			if( $this->props['swiper_transition'] === "none" ) {
+				$swiper_props['effect'] = $this->props['fade'];
+				$swiper_props['speed'] = 0;
+			}
+			else {
+				$swiper_props['effect'] = $this->props['swiper_transition'];
+			}
 		}
 
 		// lazy loading
