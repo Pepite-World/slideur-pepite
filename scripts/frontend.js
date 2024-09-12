@@ -1,7 +1,6 @@
 // window.swiperVideoInit = function (data) {
 window.onSwiperTransitionEnd = function (data) {
     let i = $(".swiper-slide").length;
-    console.log( i )
     for ( var j = 0; j < i; j++) {
         try {
             // Get jQuery iFrame
@@ -26,23 +25,26 @@ window.onSwiperTransitionEnd = function (data) {
             // Vimeo
             else if (  iframe.attr('src').indexOf('vimeo.com') !== -1 ) {
                 const vimeoPlayer = new Vimeo.Player(iframe);
-                // console.log( vimeoPlayer)
                 // Play incoming slide
                 if ( j === data.activeIndex ) {
-                    vimeoPlayer.play().then(()=>{console.log("play")});
+                    vimeoPlayer.play()
                 }
                 // Pause all other slides
                 else {
-                    vimeoPlayer.pause().then(()=>{console.log("pause")});
+                    vimeoPlayer.pause()
                 }
-                // console.log(j, data.activeIndex)
             }
 
         }
         catch(e){
-            console.debug( e )
             continue
         }
     }
 }
+// $('.et_pb_module.pesl_pepite_slider.swiper').on("mousemove", (e)=>{
+//     var rect = e.target.getBoundingClientRect();
+//     var x = e.clientX - rect.left;
+//     var centerX = (rect.right - rect.left) / 2;
+//     var zone = x < centerX ? console.log('Left') : console.log('Right');
+// })
 // window.onSwiperTransitionEnd = swiperVideoInit;

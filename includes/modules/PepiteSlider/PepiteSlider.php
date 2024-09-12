@@ -22,7 +22,6 @@ class PESL_PepiteSlider extends ET_Builder_Module
 		$this->child_item_text = 'Slide';
 
 		$this->main_css_element = '%%order_class%% > .pesl_pepite_slider';
-		/** TODO: add controls for arrows SVGs **/
 		$this->settings_modal_toggles = array(
 			'general'    => array(
 				'toggles' => array(
@@ -876,14 +875,14 @@ class PESL_PepiteSlider extends ET_Builder_Module
 
 		if ($prev_cursor && $next_cursor) {
 			ET_Builder_Module::set_style($render_slug, array(
-				'selector'    => '.et_pb_module.pesl_pepite_slider .swiper-arrow-button.swiper-button-prev.no-arrows:hover:after',
+				'selector'    => '.has-cursor-prev *:not(a)',
 				'declaration' => sprintf(
 					'cursor: url(%s), auto',
 					$prev_cursor
 				),
 			));
 			ET_Builder_Module::set_style($render_slug, array(
-				'selector'    => '.et_pb_module.pesl_pepite_slider .swiper-arrow-button.swiper-button-next.no-arrows:hover:after',
+				'selector'    => '.has-cursor-next *:not(a)',
 				'declaration' => sprintf(
 					'cursor: url(%s), auto',
 					$next_cursor
@@ -892,7 +891,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 		}
 		if ($disabled_cursor) {
 			ET_Builder_Module::set_style($render_slug, array(
-				'selector'    => '.et_pb_module.pesl_pepite_slider .swiper-arrow-button.swiper-button-disabled.no-arrows:hover:after',
+				'selector'    => '.has-cursor-disabled *:not(a)',
 				'declaration' => sprintf(
 					'cursor: url(%s), auto',
 					$disabled_cursor
@@ -959,9 +958,9 @@ class PESL_PepiteSlider extends ET_Builder_Module
 		$count = $show_count === 'on' ? '<div class="swiper-item-count"></div>' : '';
 		// No arrows activates invisible click zones on slider
 		$navigation = $show_arrows === 'on' ?
-			'<div class="swiper-arrow-button swiper-button-prev"></div> <div class="swiper-arrow-button swiper-button-next"></div>' :
-			'<div class="swiper-arrow-button swiper-button-prev no-arrows"></div> <div class="swiper-arrow-button swiper-button-next no-arrows"></div>';
-
+			'<div class="swiper-arrow-button swiper-button-prev"></div> <div class="swiper-arrow-button swiper-button-next"></div>' : "";
+			// '<div class="swiper-arrow-button swiper-button-prev no-arrows"></div> <div class="swiper-arrow-button swiper-button-next no-arrows"></div>';
+		
 		$scrollbar  = $show_scrollbar === 'on' ? '<div class="swiper-scrollbar"></div>' : '';
 		$output = sprintf(
 			'<div%3$s class="%1$s swiper"%5$s >
@@ -1045,24 +1044,47 @@ class PESL_PepiteSlider extends ET_Builder_Module
 	{
 		$fmt = "<script type=\"text/javascript\" id=\"swiper-config\">
 			(function() {
-				const swiper = new Swiper(
+				const peslSwiper = new Swiper(
 					'.swiper',
 					%1\$s
 				);
-				swiper.on( 'transitionEnd', function (data) {
+				peslSwiper.on( 'transitionEnd', function (data) {
+					let el = $(data.el).find('.swiper-slide').get(data.realIndex)
+					if( $(el).hasClass('et_pb_bg_layout_dark') ) {
+						$('body').addClass('et_pb_bg_layout_dark');
+					} else {
+						$('body').removeClass('et_pb_bg_layout_dark');
+					}
+				});
+				peslSwiper.on( 'transitionEnd', function (data) {
 					window.onSwiperTransitionEnd(this);
 					var itemCount = $(data.el).find('.swiper-item-count');
 					if (itemCount) itemCount.get(0).innerHTML = (data.realIndex +  1) + '/' + data.slides.length;
 				});
-				swiper.on( 'init', function(data){
+				peslSwiper.on( 'init', function(data){
 					var itemCount = $(data.el).find('.swiper-item-count');
 					if (itemCount) itemCount.get(0).innerHTML = (data.realIndex +  1) + '/' + data.slides.length;
 				});
-				swiper.init();
+				if( %2\$s ) peslSwiper.on('click', (swiper, e)=>{
+					var rect = e.target.getBoundingClientRect();
+					var x = e.clientX - rect.left;
+					var centerX = (rect.right - rect.left) / 2;
+					var zone = x < centerX ? swiper.slidePrev() : swiper.slideNext();
+				})
+				peslSwiper.init();
+
+				$('.et_pb_module.pesl_pepite_slider.swiper').on('mousemove', (e)=>{
+					var rect = e.target.getBoundingClientRect();
+					var x = e.clientX - rect.left;
+					var centerX = (rect.right - rect.left) / 2;
+					$('.et_pb_module.pesl_pepite_slider.swiper')
+						.addClass( x < centerX ? 'has-cursor-prev' : 'has-cursor-next')
+						.removeClass( x > centerX ? 'has-cursor-prev' : 'has-cursor-next');
+				})
 			})();
 		</script>";
 		$swiper_props = $this->get_swiper_conf();
-		echo sprintf($fmt, $swiper_props);
+		echo sprintf($fmt, $swiper_props, "'off' === '{$this->props['show_arrows']}'");
 	}
 
 	private function get_swiper_conf()
@@ -1093,7 +1115,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 		}
 		if (@$this->props['swiper_transition']) {
 			if( $this->props['swiper_transition'] === "none" ) {
-				$swiper_props['effect'] = $this->props['fade'];
+				$swiper_props['effect'] = 'fade';
 				$swiper_props['speed'] = 0;
 			}
 			else {
