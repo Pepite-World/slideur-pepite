@@ -635,11 +635,12 @@ class Pepite_Slider_Item extends ET_Builder_Module
 				)
 			);
 		}
-        if ( @$this->props["height"] && $this->props["height"] !== "100%" ) {
+        if ( @$this->props["height"]  && $this->props["height"] !== "100%" )  {
+            // $val = preg_match("/^\d+/", $this->props["height"] !== "100%", $matches);
             ET_Builder_Element::set_style(
 				$render_slug,
 				array(
-					'selector'    => '%%order_class%% .et_pb_slide_image > img',
+					'selector'    => '%%order_class%% .et_pb_slide_image, %%order_class%% .et_pb_slide_image > img',
 					'declaration' => 'width: auto !important;',
 				)
 			);

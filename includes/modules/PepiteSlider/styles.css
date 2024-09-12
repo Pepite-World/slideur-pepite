@@ -84,9 +84,9 @@
     width: unset !important;
 }
 
-.et_pb_module.pesl_pepite_slider .et_pb_slide_image {
+/* .et_pb_module.pesl_pepite_slider .et_pb_slide_image {
     width: auto;
-}
+} */
 .et_pb_module.pesl_pepite_slider .et_pb_slide_image>img {
     object-fit: cover;
     display: block;
