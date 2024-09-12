@@ -516,11 +516,6 @@ class Pepite_Slider_Item extends ET_Builder_Module
     }
 
     public function render( $attrs, $content, $render_slug ) {
-
-        // echo "<pre>";
-        // var_dump( $this->props );
-        // echo "</pre>";
-
 		$multi_view = et_pb_multi_view_options( $this );
 		$alignment  = $this->props['alignment'];
 		// Allowing full html for backwards compatibility.
@@ -640,6 +635,15 @@ class Pepite_Slider_Item extends ET_Builder_Module
 				)
 			);
 		}
+        if ( @$this->props["height"] && $this->props["height"] !== "100%" ) {
+            ET_Builder_Element::set_style(
+				$render_slug,
+				array(
+					'selector'    => '%%order_class%% .et_pb_slide_image > img',
+					'declaration' => 'width: auto !important;',
+				)
+			);
+        }
 
 		// if ( $is_text_overlay_applied ) {
 		// 	// Text Overlay Color.

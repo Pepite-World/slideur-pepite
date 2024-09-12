@@ -84,11 +84,15 @@
     width: unset !important;
 }
 
+.et_pb_module.pesl_pepite_slider .et_pb_slide_image {
+    width: auto;
+}
 .et_pb_module.pesl_pepite_slider .et_pb_slide_image>img {
     object-fit: cover;
     display: block;
     width: 100%;
     height: 100%;
+    margin: auto;
 }
 
 
