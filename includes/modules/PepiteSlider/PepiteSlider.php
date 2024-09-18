@@ -361,6 +361,33 @@ class PESL_PepiteSlider extends ET_Builder_Module
 				'mobile_options'   => true,
 				'hover'            => 'tabs',
 			),
+			'autoplay'         => array(
+				'label'            => esc_html__('Autoplay Slides', 'pesl-pepite-slider'),
+				'type'             => 'yes_no_button',
+				'option_category'  => 'configuration',
+				'options'          => array(
+					'on'  => et_builder_i18n('Yes'),
+					'off' => et_builder_i18n('No'),
+				),
+				'default_on_front' => 'on',
+				// 'toggle_slug'      => 'elements',
+				'description'      => esc_html__('This setting will turn on and off autoplay on slider.', 'pesl-pepite-slider'),
+				'mobile_options'   => true,
+				'hover'            => 'tabs',
+			),
+			'autoplay_delay'	=> array(
+				'label'              => et_builder_i18n('Autoplay delay (ms)'),
+				'type'               => 'text',
+				'default_on_front' 	 => '5000',
+				'option_category'    => 'configuration',
+				'description'        => esc_html__('Delay in milliseconds before next slide.', 'et_builder'),
+				// 'toggle_slug'        => 'elements',
+				'mobile_options'     => false,
+				'hover'              => false,
+				'show_if' => [
+					'autoplay' => 'on'
+				],
+			),
 			'show_scrollbar'         => array(
 				'label'            => esc_html__('Show Scrollbar', 'pesl-pepite-slider'),
 				'type'             => 'yes_no_button',
@@ -884,7 +911,7 @@ class PESL_PepiteSlider extends ET_Builder_Module
 			ET_Builder_Module::set_style($render_slug, array(
 				'selector'    => '.has-cursor-next *:not(a)',
 				'declaration' => sprintf(
-					'cursor: url(%s), auto',
+					'cursor: url(%s) 50 25, auto',
 					$next_cursor
 				),
 			));
@@ -1048,31 +1075,53 @@ class PESL_PepiteSlider extends ET_Builder_Module
 					'.swiper',
 					%1\$s
 				);
-				peslSwiper.on( 'transitionEnd', function (data) {
-					let el = $(data.el).find('.swiper-slide').get(data.realIndex)
-					if( $(el).hasClass('et_pb_bg_layout_dark') ) {
-						$('body').addClass('et_pb_bg_layout_dark');
-					} else {
-						$('body').removeClass('et_pb_bg_layout_dark');
-					}
+
+				// DEBUG here
+				peslSwiper.on( 'activeIndexChange', function (data) {
+					var fontTransition = setTimeout( ()=>{
+						clearTimeout(fontTransition);
+						
+						// let el = $(data.el).find('.swiper-slide').get(data.realIndex)
+						let el = $(data.el).find('.swiper-slide.swiper-slide-active')
+						if( el.hasClass('et_pb_bg_layout_dark') ) {
+							$('body').removeClass('et_pb_bg_layout_light');
+							$('body').addClass('et_pb_bg_layout_dark');
+						} 
+						else {
+							$('body').removeClass('et_pb_bg_layout_dark');
+							$('body').addClass('et_pb_bg_layout_light');
+						}
+					}, 500)
 				});
+
 				peslSwiper.on( 'transitionEnd', function (data) {
 					window.onSwiperTransitionEnd(this);
 					var itemCount = $(data.el).find('.swiper-item-count');
 					if (itemCount) itemCount.get(0).innerHTML = (data.realIndex +  1) + '/' + data.slides.length;
 				});
+
 				peslSwiper.on( 'init', function(data){
 					var itemCount = $(data.el).find('.swiper-item-count');
 					if (itemCount) itemCount.get(0).innerHTML = (data.realIndex +  1) + '/' + data.slides.length;
+					let el = $(data.el).find('.swiper-slide').get(0)
+					if( $(el).hasClass('et_pb_bg_layout_dark') ) {
+						$('body').addClass('et_pb_bg_layout_dark');
+					} else {
+						$('body').addClass('et_pb_bg_layout_light');
+					}
+
+					window.onSwiperInit(this);
+
 				});
+
 				if( %2\$s ) peslSwiper.on('click', (swiper, e)=>{
+					if ( e.target.tagName.toLowerCase() === 'a' ) return false; // prevent bug on Bastien's compos...
 					var rect = e.target.getBoundingClientRect();
 					var x = e.clientX - rect.left;
 					var centerX = (rect.right - rect.left) / 2;
 					var zone = x < centerX ? swiper.slidePrev() : swiper.slideNext();
 				})
-				peslSwiper.init();
-
+				
 				$('.et_pb_module.pesl_pepite_slider.swiper').on('mousemove', (e)=>{
 					var rect = e.target.getBoundingClientRect();
 					var x = e.clientX - rect.left;
@@ -1081,6 +1130,9 @@ class PESL_PepiteSlider extends ET_Builder_Module
 						.addClass( x < centerX ? 'has-cursor-prev' : 'has-cursor-next')
 						.removeClass( x > centerX ? 'has-cursor-prev' : 'has-cursor-next');
 				})
+				
+				peslSwiper.init();
+
 			})();
 		</script>";
 		$swiper_props = $this->get_swiper_conf();
@@ -1121,6 +1173,12 @@ class PESL_PepiteSlider extends ET_Builder_Module
 			else {
 				$swiper_props['effect'] = $this->props['swiper_transition'];
 			}
+		}
+		if (@$this->props['autoplay'] === 'on') {
+			$swiper_props['autoplay'] = array(
+				'delay' => @$this->props['autoplay_delay'],
+				'waitForTransition' => false,
+			);
 		}
 
 		// lazy loading

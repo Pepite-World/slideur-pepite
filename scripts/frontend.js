@@ -1,4 +1,27 @@
-// window.swiperVideoInit = function (data) {
+window.onSwiperInit = function (data) { 
+
+    // Play video on Swiper init if necessary (Vimeo won't start alone)
+
+    // Get jQuery iFrame
+    const iframe = $(data.el).find('.pesl_pepite_slider_item').eq(0).find('iframe').eq(0)
+
+    // Youtube
+    if( iframe.attr('src').indexOf('youtube.com') !== -1 ) {
+
+        // Test HtmlElement prop
+        if ( iframe.get(0).contentWindow) {
+            iframe.get(0).contentWindow.postMessage('{\"event\":\"command\",\"func\":\"playVideo\",\"args\":\"\"}', '*');
+        }
+    }
+    
+    // Vimeo
+    else if (  iframe.attr('src').indexOf('vimeo.com') !== -1 ) {
+        const vimeoPlayer = new Vimeo.Player(iframe);
+        vimeoPlayer.play()
+
+    }
+}
+
 window.onSwiperTransitionEnd = function (data) {
     let i = $(".swiper-slide").length;
     for ( var j = 0; j < i; j++) {
@@ -39,6 +62,7 @@ window.onSwiperTransitionEnd = function (data) {
         catch(e){
             continue
         }
+
     }
 }
 // $('.et_pb_module.pesl_pepite_slider.swiper').on("mousemove", (e)=>{

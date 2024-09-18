@@ -90,7 +90,8 @@ class PESL_PepiteSliderModule extends DiviExtension
 			}
 			else if (strstr($return, 'vimeo.com')) {
 				// edit url to add options
-				return str_replace( $url, "$url&controls=false&loop=true&pip=false&autoplay=true&autopause=true", $return);
+				// return str_replace( $url, "$url&controls=false&loop=true&pip=false&autoplay=1&autopause=true&muted=1", $return);
+				return str_replace( $url, "$url&controls=false&loop=true&autoplay=true&muted=true", $return);
 			}
 		}, 10, 3);
 
@@ -111,8 +112,9 @@ class PESL_PepiteSliderModule extends DiviExtension
 				$provider = add_query_arg("controls", "false", $provider);
 				$provider = add_query_arg("loop", "true", $provider);
 				$provider = add_query_arg("pip", "false", $provider);
-				$provider = add_query_arg("autopause", "true", $provider);
+				// $provider = add_query_arg("autopause", "true", $provider);
 				$provider = add_query_arg("autoplay", "true", $provider);
+				$provider = add_query_arg("muted", "true", $provider);
 				// $provider = add_query_arg("background", true, $provider);
 			}
 
